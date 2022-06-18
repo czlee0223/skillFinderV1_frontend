@@ -1,0 +1,384 @@
+{% extends "base.html" %}{% block content %}
+<style>
+
+        .chart {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartCard {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        margin-right: 10px;
+        margin-left: 10px;
+        width: 90%;
+        height: 100%;
+        padding: 1px;
+        border-radius: 5px;
+        background: rgb(0, 0, 0);
+      }
+</style>
+<div class="row" style="height: 12vh;">
+
+<div class="mycontainer">
+
+
+   <h4 class="main text-white">Roles:</h4>
+   <div class="secondary dropdown-center">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCenterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+      Data Scientist
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownCenterBtn" id="dropdownMenu">
+      <li><a class="dropdown-item" href="#" value=0>Data Scientist</a></li>
+      <li><a class="dropdown-item" href="#" value=1>Data Analyst</a></li>
+      <li><a class="dropdown-item" href="#" value=2>Data Engineer</a></li>
+      <li><a class="dropdown-item" href="#" value=3>Machine Learning</a></li>
+    </ul>
+  </div>
+
+  </div>
+</div>
+<div class="row" style="height: 38vh;">
+    <div class="chart chartCard">
+        <div class="chartBox">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="chartBox">
+          <canvas id="myChart2"></canvas>
+        </div>
+        <div class="chartBox">
+            <canvas id="myChart3"></canvas>
+          </div>
+      </div>
+</div>
+<div class="row" style="height: 38vh;">
+    <div class="chart chartCard">
+        <div class="chartBox">
+          <canvas id="myChart4"></canvas>
+        </div>
+        <div class="chartBox">
+          <canvas id="myChart5"></canvas>
+        </div>
+     </div>
+</div>
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    // setup
+    
+    const data = {
+      labels: {{proglang[0][0]|safe}},
+      datasets: [{
+        label: 'Percentage',
+        data: {{proglang[1][0]|safe}},
+        backgroundColor: [
+
+          'rgba(54, 162, 235, 0.2)',
+
+        ],
+        borderColor: [
+
+          'rgba(54, 162, 235, 1)',
+
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              color:'white',
+              beginAtZero: true,
+              callback: function(value) {
+                                         
+                        return value+'%';
+                    }
+            }
+          },
+          x: {
+              ticks: { color: 'white', beginAtZero: true ,autoSkip: false}
+          }
+        },
+        maintainAspectRatio: false,
+        
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+                color: 'white',
+                display: true,
+                text: 'Prgramming Language Proportion'
+            }
+        }
+        
+      },
+      
+    };
+
+    const data2 = {
+      labels: {{lib[0][0]|safe}},
+      datasets: [{
+        label: 'Percentage',
+        data: {{lib[1][0]|safe}},
+        backgroundColor: [
+
+          'rgba(255, 206, 86, 0.2)',
+        ],
+        borderColor: [
+
+          'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1
+      }]
+    };
+    const config2 = {
+      type: 'bar',
+          data:data2,
+          options: {
+            scales: {
+              y: {
+                ticks: {
+                  color:'white',
+                  beginAtZero: true,
+                  callback: function(value) {
+                                             
+                            return value+'%';
+                        }
+                }
+              },
+              x: {
+                  ticks: { color: 'white', beginAtZero: true, autoSkip: false }
+              }
+            },
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                    color: 'white',
+                    display: true,
+                    text: 'Tools Proportion'
+                }
+            }
+            
+          },
+    };
+
+    const data3 = {
+      labels: {{tools[0][0]|safe}},
+      datasets: [{
+        label: 'Percentage',
+        data: {{tools[1][0]|safe}},
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)'
+          
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)'
+
+        ],
+        borderWidth: 1
+      }]
+    };
+    const config3 = {
+      type: 'bar',
+          data:data3,
+          options: {
+            scales: {
+              y: {
+                ticks: {
+                  color:'white',
+                  beginAtZero: true,
+                  callback: function(value) {
+                                             
+                            return value+'%';
+                        }
+                }
+              },
+              x: {
+                  ticks: { color: 'white', beginAtZero: true }
+              }
+            },
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                    color: 'white',
+                    display: true,
+                    text: 'Library & Packages Proportion'
+                }
+            }
+            
+          },
+    };
+
+    const pieData = {
+      labels: {{edu[0][0]|safe}},
+      datasets: [{
+        label: 'My First Dataset',
+        data: {{edu[1][0]|safe}},
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    };
+
+    const pieConfig = {
+      type: 'pie',
+      data: pieData,
+      options:{
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            // fullSize: false,
+            labels:{
+              color: 'white',
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            enabled:false
+          },
+          datalabels: {
+            
+            formatter: (value,context) => {
+              const datapoints = context.chart.data.datasets[0].data;
+              function totalSum(total,datapoint) {
+                return total +datapoint;
+              }
+              const totalValue = datapoints.reduce(totalSum, 0);
+              const percentageValue = (value/totalValue * 100).toFixed(1)
+              return `${percentageValue}%`;
+            }
+          }
+        }
+      },
+      plugins:[ChartDataLabels]
+    };
+
+    const data5 = {
+      labels: {{edu[0][0]|safe}},
+      datasets: [{
+        label: 'Percentage',
+        data: {{edu[1][0]|safe}},
+        backgroundColor: [
+
+          'rgba(153, 102, 255, 0.2)',
+
+        ],
+        borderColor: [
+
+          'rgba(153, 102, 255, 1)',
+
+        ],
+        borderWidth: 1
+      }]
+    };
+    const config5 = {
+      type: 'bar',
+          data:data5,
+          options: {
+            scales: {
+              y: {
+                ticks: { color: 'white', beginAtZero: true }
+                
+              },
+              x: {
+                ticks: {
+                  color:'white',
+                  beginAtZero: true,
+                  callback: function(value) {
+                                             
+                            return value+'%';
+                        }
+                }
+              }
+            },
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                    display: true,
+                    color: 'white',
+                    text: 'Location Proportion'
+                }
+            }
+            
+          },
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+    const myChart2 = new Chart(
+      document.getElementById('myChart2'),
+      config2
+    );
+    const myChart3 = new Chart(
+      document.getElementById('myChart3'),
+      config3
+    );
+    const myChart4 = new Chart(
+      document.getElementById('myChart4'),
+      pieConfig
+    );
+    const myChart5 = new Chart(
+      document.getElementById('myChart5'),
+      config5
+    );
+
+    $(function(){
+
+      $(".dropdown-menu li a").click(function(){
+
+        $(".btn:first-child").text($(this).text());
+          var index = $(this).attr("value");
+          var pl = {{proglang|safe}};
+          var tl = {{tools|safe}};
+          var lib = {{lib|safe}};
+          var edu = {{edu|safe}}
+
+          myChart.data.datasets[0].data = pl[1][index]
+          myChart.data.labels = pl[0][index]
+          myChart.update()
+          myChart2.data.datasets[0].data = tl[1][index]
+          myChart2.data.labels = tl[0][index]
+          myChart2.update()
+          myChart3.data.datasets[0].data = lib[1][index]
+          myChart3.data.labels = lib[0][index]
+          myChart3.update()
+          myChart4.data.datasets[0].data = edu[1][index]
+          myChart4.data.labels = edu[0][index]
+          myChart4.update()
+      });
+    
+    });
+
+</script>
+
+{% endblock %}
+
+{% endblock %}
