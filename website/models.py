@@ -31,6 +31,14 @@ class Tools(db.Model):
     DA_count = db.Column(db.Integer,nullable=False)
     DE_count = db.Column(db.Integer,nullable=False)
     ML_count = db.Column(db.Integer,nullable=False)
+    
+class Location(db.Model):
+    __tablename__ = 'location'
+    Words = db.Column(db.String,primary_key=True)
+    DS_count = db.Column(db.Integer,nullable=False)
+    DA_count = db.Column(db.Integer,nullable=False)
+    DE_count = db.Column(db.Integer,nullable=False)
+    ML_count = db.Column(db.Integer,nullable=False)
 
 
 

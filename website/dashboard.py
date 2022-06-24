@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from .models import ProgLang,Library,Tools,Education
+from .models import ProgLang,Library,Tools,Education, Location
 dashboard = Blueprint('dashboard',__name__)
 
 @dashboard.route('/dashboard')  
@@ -12,8 +12,8 @@ def showDashboard():
     # print(lib)
     tools = getDataBaseValue(Tools)
     edu = getDataBaseValue(Education)
-    # print(proglang)
-    return render_template("dashboard.html",proglang=proglang, lib=lib,tools=tools,edu=edu)
+    loc = getDataBaseValue(Location)
+    return render_template("dashboard.html",proglang=proglang, lib=lib,tools=tools,edu=edu,loc=loc)
 
 def getDataBaseValue(database_class):
     

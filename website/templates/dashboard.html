@@ -275,10 +275,10 @@
     };
 
     const data5 = {
-      labels: {{edu[0][0]|safe}},
+      labels: {{loc[0][0]|safe}},
       datasets: [{
         label: 'Percentage',
-        data: {{edu[1][0]|safe}},
+        data: {{loc[1][0]|safe}},
         backgroundColor: [
 
           'rgba(153, 102, 255, 0.2)',
@@ -359,7 +359,8 @@
           var pl = {{proglang|safe}};
           var tl = {{tools|safe}};
           var lib = {{lib|safe}};
-          var edu = {{edu|safe}}
+          var edu = {{edu|safe}};
+          var loc = {{loc|safe}};
 
           myChart.data.datasets[0].data = pl[1][index]
           myChart.data.labels = pl[0][index]
@@ -373,6 +374,9 @@
           myChart4.data.datasets[0].data = edu[1][index]
           myChart4.data.labels = edu[0][index]
           myChart4.update()
+          myChart5.data.datasets[0].data = loc[1][index]
+          myChart5.data.labels = loc[0][index]
+          myChart5.update()
       });
     
     });
