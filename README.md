@@ -1,4 +1,4 @@
-# [skillFinderV1_frontend](http://skillfinder1.azurewebsites.net/)
+# [SkillFinder](http://skillfinder1.azurewebsites.net/)
 
 A personal project inspired by [Emilianopp](https://github.com/Emilianopp/SkillQuery). 
 
